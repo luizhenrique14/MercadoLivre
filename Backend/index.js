@@ -2,6 +2,8 @@ const express = require('express');
 const sequelize = require('./config/db');
 const cartRoutes = require('./routes/cartRoutes');
 const productRoutes = require('./routes/productRoutes');
+const cors = require('cors');
+
 
 const app = express();
 
@@ -15,6 +17,8 @@ sequelize.sync({ force: true }).then(() => {
 
 // Middleware
 app.use(express.json());
+
+app.use(cors());
 
 // Rotas
 app.use('/api', cartRoutes);

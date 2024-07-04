@@ -13,15 +13,20 @@ import { ResetSenhaComponent } from './component/login/reset-senha/reset-senha.c
 import { AppRoutingModule } from './app-routing.module';
 
 import { MatInputModule } from '@angular/material/input';
+import { HomeComponent } from './component/home/home.component';
+import {MatIconModule} from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     LoginComponent,
+    HomeComponent,
     ResetSenhaComponent,
   ],
   imports: [
+    MatIconModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatCardModule,
@@ -31,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     AppRoutingModule,
     MatInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

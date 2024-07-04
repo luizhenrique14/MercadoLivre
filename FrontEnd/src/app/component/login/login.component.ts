@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       login: ['', [Validators.required]],
       senha: ['', [Validators.required, Validators.minLength(6)]]
@@ -19,8 +20,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('Form Value', this.loginForm.value);
-      // Aqui você pode adicionar a lógica de autenticação
+      this.router.navigate(['/home']);
     }
   }
 

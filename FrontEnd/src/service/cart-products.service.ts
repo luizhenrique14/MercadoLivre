@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IProduct } from 'src/model/product';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class CartProductsService {
+export class CartProductServie {
+    private apiUrl = 'http://localhost:5000/api/products'; // URL do seu backend API
 
-  constructor() { }
+    constructor(private http: HttpClient) {}   
 
-  getProducts() {
-    return this.$http.get(apiUrl)
-      .then(response => {
-        return response.data.map(productData => new Product(productData.id, productData.name, productData.price));
-      });
-  }
- 
-  addProduct(product:any) {
-    return this.$http.post(apiUrl, product);
-  }
-
-  // updateProduct(productId: string, product) {
-  //   return this.$http.put(apiUrl + '/' + productId, product);
-  // }
-
-  deleteProduct(productId: string) {
-    return this.$http.delete(apiUrl + '/' + productId);
-  }
+    getProdutos(): Observable<IProduct[]> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json', // Exemplo de header opcional
+            'Authorization': 'Bearer my-auth-token' // Exemplo de header opcional
+          });
+          return this.http.get<IProduct[]>(this.apiUrl, { headers })
+          .pipe(
+            catchError(error => {
+              console.error('Erro ao obter produtos:', error);
+              throw error;
+            })
+          );
+    }
 }
