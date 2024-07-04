@@ -14,6 +14,28 @@
           </h1>
         </div>
       </div>
+      <form [formGroup]="newProduct">
+        <div class="row container">
+          <div class="col-md-4">
+            <mat-form-field>
+              Nome: <input matInput placeholder="name" formControlName="name" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              Valor:    <input matInput placeholder="Preço" formControlName="price" />
+              <mat-error *ngIf="newProduct.get('price')?.hasError('required')">Campo obrigatório</mat-error>
+              <mat-error *ngIf="newProduct.get('price')?.hasError('invalidPrice')">Digite um preço válido</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <button mat-fab extended (click)="addNewProduct()">
+              <mat-icon>shopping_cart_checkout</mat-icon>
+              Adicionar Novo Produto
+            </button>
+          </div>
+        </div>
+      </form>
       <mat-card>
         <div class="container px-4 p-3">
           <div class="row">
