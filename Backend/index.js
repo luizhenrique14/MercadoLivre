@@ -6,7 +6,7 @@ const productRoutes = require('./routes/productRoutes');
 const app = express();
 
 // Conectar ao banco de dados
-sequelize.sync().then(() => {
+sequelize.sync({ force: true }).then(() => {
   console.log('Database synced');
 }).catch(err => {
   console.error('Database sync error:', err);
