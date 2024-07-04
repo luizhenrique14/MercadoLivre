@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 p-5">
+      <mat-card>
+        <div class="container px-4 p-3">
+          <div class="row">
+            <div class="col-md-4">
+              <mat-card-header>
+                <mat-card-title>Kybernus</mat-card-title>
+              </mat-card-header>
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-3 offset-md-3">                  
+                  <mat-form-field>
+                   <input matInput placeholder="login" formControlName="login">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 offset-md-3">
+                  <mat-form-field>
+                    <mat-label>Senha</mat-label>
+                     <input matInput type="password" placeholder="senha" formControlName="senha">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5 p-3"><a routerLink="/reset-senha">Esqueceu a senha?</a></div>
+                <div class="col-md-3 ms-md-auto p-3">
+                  <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

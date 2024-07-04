@@ -1,0 +1,86 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 p-5">
+      <mat-card>
+        <div class="container px-4 p-3">
+          <div class="row">
+            <div class="col-md-4">
+              <mat-card-header>
+                <mat-card-title>Kybernus</mat-card-title>
+              </mat-card-header>
+            </div>
+
+            <form [formGroup]="formResetSenha" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-3 offset-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      placeholder="login"
+                      formControlName="login"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 offset-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      placeholder="código de verificao"
+                      formControlName="codVerificacao"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              
+              <div class="row">
+                <div class="col-md-3 offset-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="password"
+                      placeholder="nova senha"
+                      formControlName="novaSenha"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 offset-md-3">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="password"
+                      placeholder="confirmar nova senha"
+                      formControlName="confirmarNovaSenha"
+                    />
+                  </mat-form-field>
+                </div>
+                <mat-error *ngIf="!senhasIguais">
+                  As senhas não coincidem.
+                </mat-error>
+                
+                <mat-error *ngIf="!validPassword.valid">
+                  {{validPassword.message}}
+                </mat-error>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5 p-3">
+                  <a routerLink="/login">voltar para login</a>
+                </div>
+                <div class="col-md-3 ms-md-auto p-3">
+                  <button mat-raised-button color="primary" type="submit">
+                    Enviar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
