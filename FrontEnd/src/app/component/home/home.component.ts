@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
   calculaValorTotal(){
     this.productService.getCart().subscribe(
       (cart) => {
-        console.log('amount', cart)
         this.amount = cart.reduce((total, item) => total + item.subtotal, 0);        
       },
       (error) => console.error('Erro ao carregar produtos', error)
@@ -82,7 +81,6 @@ export class HomeComponent implements OnInit {
       this.productService.addProduct(this.newProductItem).subscribe(
         (produtos) => {
           this.ngOnInit();
-          console.log('produtos', produtos);
         },
         (error) => console.error('Erro ao carregar produtos', error)
       );
@@ -117,7 +115,6 @@ export class HomeComponent implements OnInit {
       this.productService.addProductToCart(addCart).subscribe(
         (cart) => {
           this.ngOnInit();
-          console.log('produtos', cart);
         },
         (error) => console.error('Erro ao carregar produtos', error)
       );

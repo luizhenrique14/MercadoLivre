@@ -9,7 +9,7 @@ import { ICart, ICartRequest } from 'src/model/cart';
   providedIn: 'root',
 })
 export class CartProductServie {
-  private readonly apiUrl = 'http://localhost:5000/api';
+  private readonly apiUrl = 'http://localhost:4000/api';
   
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',

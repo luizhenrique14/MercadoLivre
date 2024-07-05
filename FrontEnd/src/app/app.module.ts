@@ -18,6 +18,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './component/cart/cart.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from 'src/service/auth.service';
+import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
