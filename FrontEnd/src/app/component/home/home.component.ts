@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
       price: ['', [Validators.required, this.priceValidator]],
     });
   }
+
+  amount: number = 0;
   newProduct: FormGroup;
   produtos: IProduct[] = [];
   carrinho: ICart[] = [
@@ -56,6 +58,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProdutos();
+    this.calculaValorTotal();
+  }
+
+  calculaValorTotal(){
+    this.productService.getCart().subscribe(
+      (cart) => {
+        console.log('amount', cart)
+        this.amount = cart.reduce((total, item) => total + item.subtotal, 0);        
+      },
+      (error) => console.error('Erro ao carregar produtos', error)
+    );
   }
 
   addNewProduct() {

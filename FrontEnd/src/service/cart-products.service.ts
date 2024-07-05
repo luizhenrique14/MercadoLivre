@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IProduct } from 'src/model/product';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
@@ -9,82 +9,55 @@ import { ICart, ICartRequest } from 'src/model/cart';
   providedIn: 'root',
 })
 export class CartProductServie {
-  private getProductpath = 'http://localhost:5000/api/products'; // URL do seu backend API
-  private addProductpath = 'http://localhost:5000/api/products/add'; // URL do seu backend API
-
-  private cartPath = 'http://localhost:5000/api/cart';
-  private addCartPath = 'http://localhost:5000/api/cart/add';
+  private readonly apiUrl = 'http://localhost:5000/api';
+  
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer my-auth-token', // Exemplo de header opcional
+  });
 
   constructor(private http: HttpClient) {}
 
   getProdutos(): Observable<IProduct[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Exemplo de header opcional
-      Authorization: 'Bearer my-auth-token', // Exemplo de header opcional
-    });
-    return this.http.get<IProduct[]>(this.getProductpath, { headers }).pipe(
-      catchError((error) => {
-        console.error('Erro ao obter produtos:', error);
-        throw error;
-      })
+    return this.http.get<IProduct[]>(`${this.apiUrl}/products`, { headers: this.headers }).pipe(
+      catchError(this.handleError('Erro ao obter produtos'))
     );
   }
 
   addProduct(product: IProduct): Observable<IProduct> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Exemplo de header opcional
-      Authorization: 'Bearer my-auth-token', // Exemplo de header opcional
-    });
-    return this.http
-      .post<IProduct>(this.addProductpath, product, { headers })
-      .pipe(
-        catchError((error) => {
-          console.error('Erro ao adicionar produto:', error);
-          throw error;
-        })
-      );
+    return this.http.post<IProduct>(`${this.apiUrl}/products/add`, product, { headers: this.headers }).pipe(
+      catchError(this.handleError('Erro ao adicionar produto'))
+    );
   }
 
   getCart(): Observable<ICart[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Exemplo de header opcional
-      Authorization: 'Bearer my-auth-token', // Exemplo de header opcional
-    });
-    return this.http.get<ICart[]>(this.cartPath, { headers }).pipe(
-      catchError((error) => {
-        console.error('Erro ao obter produtos:', error);
-        throw error;
-      })
+    return this.http.get<ICart[]>(`${this.apiUrl}/cart`, { headers: this.headers }).pipe(
+      catchError(this.handleError('Erro ao obter produtos do carrinho'))
     );
   }
 
   addProductToCart(product: ICartRequest): Observable<IProduct> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Exemplo de header opcional
-      Authorization: 'Bearer my-auth-token', // Exemplo de header opcional
-    });
-    return this.http
-      .post<IProduct>(this.addCartPath, product, { headers })
-      .pipe(
-        catchError((error) => {
-          console.error('Erro ao adicionar produto ao carrinho', error);
-          throw error;
-        })
-      );
+    return this.http.post<IProduct>(`${this.apiUrl}/cart/add`, product, { headers: this.headers }).pipe(
+      catchError(this.handleError('Erro ao adicionar produto ao carrinho'))
+    );
   }
 
-  removeItem(idItem: string) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Exemplo de header opcional
-      Authorization: 'Bearer my-auth-token', // Exemplo de header opcional
-    });
-    return this.http
-      .delete<ICart[]>(this.cartPath + '/' + idItem, { headers })
-      .pipe(
-        catchError((error) => {
-          console.error('Erro ao obter produtos:', error);
-          throw error;
-        })
-      );
+  removeItem(idItem: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/cart/${idItem}`, { headers: this.headers }).pipe(
+      catchError(this.handleError('Erro ao remover produto do carrinho'))
+    );
+  }
+
+  updateProductQuantity(cartItem: ICart): Observable<ICart> {
+    return this.http.put<ICart>(`${this.apiUrl}/cart/${cartItem.id}`, cartItem, { headers: this.headers }).pipe(
+      catchError(this.handleError('Erro ao atualizar quantidade do produto no carrinho'))
+    );
+  }
+
+  private handleError(message: string) {
+    return (error: any): Observable<never> => {
+      console.error(message, error);
+      return throwError(() => new Error(message));
+    };
   }
 }

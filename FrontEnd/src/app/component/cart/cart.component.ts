@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ICart, ICartRequest } from 'src/model/cart';
+import { ICart } from 'src/model/cart';
 import { IProduct } from 'src/model/product';
 import { CartProductServie } from 'src/service/cart-products.service';
 
@@ -73,8 +73,8 @@ export class CartComponent implements OnInit {
       : { invalidPrice: { valid: false, value: control.value } };
   }
 
-  removeCart(product: IProduct) {
-    this.productService.removeItem(product.id.toString()).subscribe(
+  removeCart(cart: ICart) {
+    this.productService.removeItem(cart.id.toString()).subscribe(
       (cart) => {
         this.ngOnInit();
       },
