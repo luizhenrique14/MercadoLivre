@@ -1,0 +1,93 @@
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { ICart, ICartRequest } from 'src/model/cart';
+import { IProduct } from 'src/model/product';
+import { CartProductServie } from 'src/service/cart-products.service';
+
+@Component({
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css'],
+})
+export class CartComponent implements OnInit {
+  constructor(
+    private productService: CartProductServie,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.newProduct = this.fb.group({
+      name: ['', [Validators.required]],
+      price: ['', [Validators.required, this.priceValidator]],
+    });
+  }
+  newProduct: FormGroup;
+  produtos: IProduct[] = [];
+  cart: ICart[] = [];  
+  amount?: number;
+  
+
+  newProductItem: IProduct = {
+    id: 0,
+    name: '',
+    price: 0.0,
+    updatedAt: '',
+    createdAt: '',
+  };
+
+  ngOnInit(): void {
+    this.getCart();
+  }
+
+  returnToHome() {
+    this.router.navigate(['/home']);
+  }
+
+  getCart(): void {
+    this.productService.getCart().subscribe(
+      (cart) => {
+        console.log('cart', cart);
+        this.cart = cart;
+        this.calculaValorTotal(this.cart)
+        
+      },
+      (error) => console.error('Erro ao carregar produtos', error)
+    );
+  }
+
+  calculaValorTotal(cart:ICart[]){
+    this.amount = cart.reduce((total, item) => total + item.subtotal, 0);
+
+  }
+
+  // Validador personalizado para aceitar apenas números separados por vírgula
+  priceValidator(control: FormControl): { [key: string]: any } | null {
+    const valid = /^\d+(,\d+)?$/.test(control.value);
+    return valid
+      ? null
+      : { invalidPrice: { valid: false, value: control.value } };
+  }
+
+  removeCart(product: IProduct) {
+    this.productService.removeItem(product.id.toString()).subscribe(
+      (cart) => {
+        this.ngOnInit();
+      },
+      (error) => console.error('Erro ao carregar produtos', error)
+    );
+  }
+
+  updateQuantity(product: IProduct): void {
+    const cartItem = this.cart.find(item => item.ProductId === product.id);
+    if (cartItem) {
+      cartItem.subtotal = product.price * cartItem.quantity;
+      this.calculaValorTotal(this.cart);
+    }
+  }
+  
+}

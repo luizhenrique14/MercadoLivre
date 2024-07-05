@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './component/home/home.component';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { CartComponent } from './component/cart/cart.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,11 @@ import { HttpClientModule } from '@angular/common/http';
     MainComponent,
     LoginComponent,
     HomeComponent,
+    CartComponent,
     ResetSenhaComponent,
   ],
   imports: [
+    FormsModule,
     MatIconModule,
     BrowserModule,
     BrowserAnimationsModule,

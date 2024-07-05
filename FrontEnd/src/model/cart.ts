@@ -9,3 +9,8 @@ export interface ICart {
   ProductId: number;
   Product: IProduct;
 }
+
+export interface ICartRequest {
+  productId: string;
+  quantity: number;
+}

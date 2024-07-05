@@ -1,13 +1,15 @@
 Executar os comandos Backend:
 
-cd Backend
+
 npm i
+cd Backend
 node index.js
 
 Executar os comandos FrontEnd:
 
-cd FrontEnd
+
 npm i
+cd FrontEnd
 npm start
 
 
