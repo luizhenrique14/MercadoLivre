@@ -11,6 +11,7 @@ import { AuthService } from 'src/service/auth.service';
 export class LoginComponent {
 
   loginForm: FormGroup;
+  openAlertError = false;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
@@ -26,7 +27,11 @@ export class LoginComponent {
       () => {
         this.router.navigate(['/home']);
       },
-      (error) => {
+      (error) => {        
+        this.openAlertError = true;
+        setTimeout(() => {
+          this.openAlertError = false;
+      }, 5000);
         console.error('Login failed', error);
       }
     );

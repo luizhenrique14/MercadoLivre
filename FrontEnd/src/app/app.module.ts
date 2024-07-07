@@ -9,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ResetSenhaComponent } from './component/login/reset-senha/reset-senha.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/service/auth.service';
 import {  HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { RegisterComponent } from './component/login/register/register.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     LoginComponent,
     HomeComponent,
     CartComponent,
-    ResetSenhaComponent,
+    RegisterComponent,
   ],
   imports: [
     FormsModule,

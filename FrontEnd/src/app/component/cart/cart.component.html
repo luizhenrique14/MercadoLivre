@@ -5,19 +5,18 @@
         <div class="col-md-6">
           <h1 class="center-align">Mercado Livre</h1>
         </div>
-        <div class="col-md-6">
-          <h1 class="center-align">
-            <button mat-fab extended (click)="returnToHome()">
-              <mat-icon>arrow_back</mat-icon>
-               Voltar
-            </button>
-          </h1>
+        <div class="col-md-2">
+          <button mat-fab extended (click)="returnToHome()">
+            <mat-icon>arrow_back</mat-icon>
+            Voltar
+          </button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <h1 class="center-align">Valor Total: {{amount}}</h1>
-        </div>       
+        <div class="col-md-4">
+          <button mat-fab extended (click)="atualizarCarrinho()">
+            <mat-icon>sync</mat-icon>
+            Atualizar Carrinho
+          </button>
+        </div>
       </div>
 
       <mat-card>
@@ -28,25 +27,40 @@
                 <div class="card-body">
                   <h3 class="card-title">{{ item.Product.name }}</h3>
                   <p class="card-text">
-                    Valor do Produto: {{item.Product.price}}
+                    Valor do Produto: {{ item.Product.price }}
                   </p>
                   <p class="card-text">
                     Quantidade:
-                    <input matInput type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.Product)">
+                    <input
+                      matInput
+                      type="number"
+                      [(ngModel)]="item.quantity"
+                      (change)="updateQuantity(item.Product)"
+                    />
                   </p>
-                  <p class="card-text">
-                    SubTotal: {{item.subtotal}}
-                  </p>
+                  <p class="card-text">SubTotal: {{ item.subtotal }}</p>
                   <button mat-fab extended (click)="removeCart(item)">
                     <mat-icon>delete</mat-icon>
                     Remover Produto
-                  </button> 
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </mat-card>
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="center-align">Quantidade total: {{ quantidadeTotal }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="center-align">
+            Valor Total do Carrinho: R${{ amount }},00
+          </h1>
+        </div>
+      </div>
     </div>
   </div>
 </div>

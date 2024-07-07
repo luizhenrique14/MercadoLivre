@@ -30,6 +30,7 @@ export class CartComponent implements OnInit {
   produtos: IProduct[] = [];
   cart: ICart[] = [];  
   amount?: number;
+  quantidadeTotal: number = 0;
   
 
   newProductItem: IProduct = {
@@ -52,16 +53,19 @@ export class CartComponent implements OnInit {
     this.productService.getCart().subscribe(
       (cart) => {
         this.cart = cart;
-        this.calculaValorTotal(this.cart)
-        
+        this.calculaValorTotal(this.cart);        
+        this.calculaQuantiadade(this.cart);        
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
   }
 
+  calculaQuantiadade(cart:ICart[]){
+    this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
   calculaValorTotal(cart:ICart[]){
     this.amount = cart.reduce((total, item) => total + item.subtotal, 0);
-
   }
 
   // Validador personalizado para aceitar apenas números separados por vírgula
@@ -87,6 +91,10 @@ export class CartComponent implements OnInit {
       cartItem.subtotal = product.price * cartItem.quantity;
       this.calculaValorTotal(this.cart);
     }
+  }
+
+  atualizarCarrinho(){
+    
   }
   
 }

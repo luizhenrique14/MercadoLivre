@@ -6,4 +6,8 @@
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
+
+  .custom-spacing {
+    margin-bottom: 16px; /* ou qualquer valor que você preferir */
+}
   

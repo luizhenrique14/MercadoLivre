@@ -17,15 +17,18 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(username: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, {
-      username,
-      password,
+    const body = {
+      username: username,
+      password: password,
+    };
+    return this.http.post<any>(`${this.apiUrl}/register`, body, {
+      headers: this.headers,
     });
   }
 
   login(username: string, password: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
     const body = {
@@ -33,15 +36,19 @@ export class AuthService {
       password: password,
     };
 
-    return this.http.post<any>('http://localhost:5000/api/login', body, { headers }).pipe(
-      tap((response) => {
-        localStorage.setItem('jwtToken', response.token); 
-      }),
-      catchError((error) => {
-        console.error('Erro ao tentar fazer login:', error);
-        throw error; 
+    return this.http
+      .post<any>('http://localhost:5000/api/login', body, {
+        headers: this.headers,
       })
-    );
+      .pipe(
+        tap((response) => {
+          localStorage.setItem('jwtToken', response.token);
+        }),
+        catchError((error) => {
+          console.error('Erro ao tentar fazer login:', error);
+          throw error;
+        })
+      );
   }
 
   logout(): void {

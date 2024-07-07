@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  quantidadeTotal: number = 0;
   amount: number = 0;
   newProduct: FormGroup;
   produtos: IProduct[] = [];
@@ -58,6 +59,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProdutos();
+    this.getCart();
     this.calculaValorTotal();
   }
 
@@ -96,6 +98,16 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  getCart(): void {
+    this.productService.getCart().subscribe(
+      (cart) => { 
+        this.calculaQuantiadade(cart);        
+      },
+      (error) => console.error('Erro ao carregar produtos', error)
+    );
+  }
+
+
   // Validador personalizado para aceitar apenas números separados por vírgula
   priceValidator(control: FormControl): { [key: string]: any } | null {
     const valid = /^\d+(,\d+)?$/.test(control.value);
@@ -123,5 +135,9 @@ export class HomeComponent implements OnInit {
 
   goToCart(){    
     this.router.navigate(['/cart']);
+  }
+
+  calculaQuantiadade(cart:ICart[]){
+    this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }
 }
