@@ -8,7 +8,14 @@ const cors = require('cors');
 const app = express();
 
 // Conectar ao banco de dados
-sequelize.sync({ force: true }).then(() => {
+// sequelize.sync({ force: true }).then(() => {
+//   console.log('Database synced');
+// }).catch(err => {
+//   console.error('Database sync error:', err);
+//   process.exit(1);
+// });
+
+sequelize.sync().then(() => {
   console.log('Database synced');
 }).catch(err => {
   console.error('Database sync error:', err);

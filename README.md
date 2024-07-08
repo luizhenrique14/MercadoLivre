@@ -29,7 +29,7 @@ Após o download, execute o instalador e siga as instruções na tela para compl
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/seu-projeto.git
+git clone https://github.com/luizhenrique14/MercadoLivre-Case.git
 
 # Navegue até o diretório do backend
 cd seu-projeto/Backend
@@ -153,8 +153,8 @@ A coleção contém as seguintes requisições:
    - Corpo:
      ```json
      {
-       "username": "example_user",
-       "password": "secretpassword"
+       "username": "luizhenrique1994",
+       "password": "Luiz1994@1994@"
      }
      ```
 
