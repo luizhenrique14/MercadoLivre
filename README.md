@@ -1,4 +1,3 @@
-```markdown
 # Projeto de Carrinho de Compras
 
 Este é um projeto de carrinho de compras utilizando Node.js para o backend, Angular para o frontend, e SQLite como banco de dados. Este guia irá levá-lo através dos passos de instalação e inicialização do projeto.
