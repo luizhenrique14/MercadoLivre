@@ -17,6 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(username: string, password: string): Observable<any> {
+    console.log('password', password)
     const body = {
       username: username,
       password: password,

@@ -5,6 +5,12 @@
         <div class="col-md-6">
           <h1 class="center-align">Mercado Livre</h1>
         </div>
+        <div *ngIf="openAlert" class="alert alert-success" role="alert">
+          Quantidade do Produto alterado com sucesso !!!
+        </div>
+        <div *ngIf="openAlertFinish" class="alert alert-success" role="alert">
+          Finalizado compra
+        </div>
         <div class="col-md-2">
           <button mat-fab extended (click)="returnToHome()">
             <mat-icon>arrow_back</mat-icon>
@@ -12,15 +18,16 @@
           </button>
         </div>
         <div class="col-md-4">
-          <button mat-fab extended (click)="atualizarCarrinho()">
-            <mat-icon>sync</mat-icon>
-            Atualizar Carrinho
+          <button mat-fab extended (click)="finalizarCompra()">
+            <mat-icon>done_all</mat-icon>
+            Finalizar Compra
           </button>
         </div>
       </div>
 
-      <mat-card>
+      
         <div class="container px-4 p-3">
+          <mat-card style="margin-top: 10%;">
           <div class="row">
             <div *ngFor="let item of cart" class="col-md-4">
               <div class="card mb-3">
@@ -47,8 +54,8 @@
               </div>
             </div>
           </div>
+        </mat-card>
         </div>
-      </mat-card>
       <div class="row">
         <div class="col-md-12">
           <h2 class="center-align">Quantidade total: {{ quantidadeTotal }}</h2>

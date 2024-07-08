@@ -25,6 +25,8 @@ export class LoginComponent {
     const senha = this.loginForm.get('senha')?.value;
     this.authService.login(login, senha).subscribe(
       () => {
+        console.log('login', login)
+        console.log('senha', senha)
         this.router.navigate(['/home']);
       },
       (error) => {        

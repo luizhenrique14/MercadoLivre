@@ -28,10 +28,11 @@ export class CartComponent implements OnInit {
   }
   newProduct: FormGroup;
   produtos: IProduct[] = [];
-  cart: ICart[] = [];  
+  cart: ICart[] = [];
   amount?: number;
   quantidadeTotal: number = 0;
-  
+  openAlert: boolean = false;
+  openAlertFinish: boolean = false;
 
   newProductItem: IProduct = {
     id: 0,
@@ -53,18 +54,18 @@ export class CartComponent implements OnInit {
     this.productService.getCart().subscribe(
       (cart) => {
         this.cart = cart;
-        this.calculaValorTotal(this.cart);        
-        this.calculaQuantiadade(this.cart);        
+        this.calculaValorTotal(this.cart);
+        this.calculaQuantiadade(this.cart);
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
   }
 
-  calculaQuantiadade(cart:ICart[]){
+  calculaQuantiadade(cart: ICart[]) {
     this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }
 
-  calculaValorTotal(cart:ICart[]){
+  calculaValorTotal(cart: ICart[]) {
     this.amount = cart.reduce((total, item) => total + item.subtotal, 0);
   }
 
@@ -86,15 +87,28 @@ export class CartComponent implements OnInit {
   }
 
   updateQuantity(product: IProduct): void {
-    const cartItem = this.cart.find(item => item.ProductId === product.id);
+    const cartItem = this.cart.find((item) => item.ProductId === product.id);
     if (cartItem) {
       cartItem.subtotal = product.price * cartItem.quantity;
       this.calculaValorTotal(this.cart);
+      this.productService
+        .updateProductQuantity(cartItem.id, cartItem.quantity)
+        .subscribe(
+          (cart) => {
+            this.openAlert = true;
+            setTimeout(() => {
+              this.openAlert = false;
+            }, 5000);
+          },
+          (error) => console.error('Erro ao carregar produtos', error)
+        );
     }
   }
 
-  atualizarCarrinho(){
-    
+  finalizarCompra() {
+    this.openAlertFinish = true;
+    setTimeout(() => {
+      this.openAlertFinish = false;
+    }, 5000);
   }
-  
 }
