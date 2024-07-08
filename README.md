@@ -1,4 +1,4 @@
-# Projeto de Carrinho de Compras
+SQLiteseu# Projeto de Carrinho de Compras
 
 Este é um projeto de carrinho de compras utilizando Node.js para o backend, Angular para o frontend, e SQLite como banco de dados. Este guia irá levá-lo através dos passos de instalação e inicialização do projeto.
 
@@ -174,7 +174,7 @@ Depois de seguir os passos de instalação e configuração acima, você deve te
 
 ## Contato
 
-Para mais informações, entre em contato com [seu-email@example.com](mailto:seu-email@example.com).
+Para mais informações, entre em contato com [luiz.henrique1494@gmail.com](mailto:luiz.henrique1494@gmail.com).
 ```
 
-Certifique-se de salvar este conteúdo em um arquivo chamado `README.md` na raiz do seu projeto. Substitua os placeholders como `https://github.com/seu-usuario/seu-projeto.git` e `seu-email@example.com` pelas informações reais do seu projeto.
+Certifique-se de salvar este conteúdo em um arquivo chamado `README.md` na raiz do seu projeto. Substitua os placeholders como `https://github.com/seu-usuario/seu-projeto.git` e `luiz.henrique1494@gmail.com` pelas informações reais do seu projeto.
