@@ -170,7 +170,7 @@ A coleção contém as seguintes requisições:
 
 ## Inicialização
 
-Depois de seguir os passos de instalação e configuração acima, você deve ter os servidores do backend e do frontend em execução. O backend estará disponível na porta especificada no seu código (por padrão, `http://localhost:3000`), e o frontend estará disponível em `http://localhost:4200`.
+Depois de seguir os passos de instalação e configuração acima, você deve ter os servidores do backend e do frontend em execução. O backend estará disponível na porta especificada no seu código em `http://localhost:4000`, com o auth em `http://localhost:5000`, e o frontend estará disponível em `http://localhost:4200`.
 
 ## Contato
 
