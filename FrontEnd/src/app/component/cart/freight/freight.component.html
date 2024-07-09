@@ -1,0 +1,83 @@
+<div class="container mt-10">
+  <div class="row justify-content-center">
+    <div class="col-md-12 p-5">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="center-align">Mercado Livre</h1>
+        </div>
+        <div class="col-md-2">
+          <button mat-fab extended (click)="returnToHome()">
+            <mat-icon>arrow_back</mat-icon>
+            Voltar
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button mat-fab extended (click)="finalizarCompra()">
+            <mat-icon>done_all</mat-icon>
+            Finalizar Compra
+          </button>
+        </div>
+      </div>
+
+      <div class="container px-4 p-3">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="center-align">Produtos</h2>
+          </div>
+        </div>
+        <mat-card>
+          <div class="row">
+            <div *ngFor="let item of cart" class="col-md-4">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h3 class="card-title">{{ item.Product.name }}</h3>
+                  <p class="card-text">
+                    Valor do Produto: R${{ item.Product.price }},00
+                  </p>
+                  <p class="card-text">Quantidade: {{ item.quantity }}</p>
+                  <p class="card-text">SubTotal: {{ item.subtotal }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="center-align">
+                Quantidade total: {{ quantidadeTotal }}
+              </h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h1 class="center-align">
+                Valor Total do Carrinho: R${{ amount }},00
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <mat-radio-group aria-label="Selecione uma opção de envio">
+            <div class="row">
+              <mat-radio-button value="correios" (change)="calculaFrete('correios')">Correios</mat-radio-button>
+            </div>
+            <div class="row">
+              <mat-radio-button value="sedex" (change)="calculaFrete('sedex')">Sedex</mat-radio-button>
+            </div>
+            <div class="row">
+              <mat-radio-button value="retireNaLoja" (change)="calculaFrete('retireNaLoja')">Retire na Loja</mat-radio-button
+              >
+            </div>
+            <div class="row mt-3">
+              <div class="col">Valor do Frete:</div>
+            </div>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,14 +43,12 @@ export class RegisterComponent implements OnInit {
       senha,
       confirmarSenha
     );
-    console.log('senha', senha)
     this.validPassword = passwordComplexityValidator(senha);
     if (
       this.formResetSenha.valid &&
       this.senhasIguais &&
       this.validPassword.valid
     ) {
-
       this.authService.register(login,senha).subscribe(
         (ret) => {
           console.log('ret', ret);
@@ -60,14 +58,10 @@ export class RegisterComponent implements OnInit {
           console.error('Erro ao registrar')  
         }
       );
-
-
-
-
       this.openAlert = true;
       setTimeout(() => {
         this.openAlert = false;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
     }, 5000); 
     } else {
       console.error('Erro ao registrar novo usuário');

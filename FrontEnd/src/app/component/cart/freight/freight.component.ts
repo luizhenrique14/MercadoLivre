@@ -6,16 +6,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ICart } from 'src/model/cart';
+import { ICart, ICartRequest } from 'src/model/cart';
 import { IProduct } from 'src/model/product';
 import { CartProductServie } from 'src/service/cart-products.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css'],
+  selector: 'app-freight',
+  templateUrl: './freight.component.html',
+  styleUrls: ['./freight.component.css'],
 })
-export class CartComponent implements OnInit {
+export class FreightComponent implements OnInit {
   constructor(
     private productService: CartProductServie,
     private fb: FormBuilder,
@@ -26,20 +26,16 @@ export class CartComponent implements OnInit {
       price: ['', [Validators.required, this.priceValidator]],
     });
   }
-  newProduct: FormGroup;
-  produtos: IProduct[] = [];
-  cart: ICart[] = [];
-  amount?: number;
-  quantidadeTotal: number = 0;
-  openAlert: boolean = false;
 
-  newProductItem: IProduct = {
-    id: 0,
-    name: '',
-    price: 0.0,
-    updatedAt: '',
-    createdAt: '',
-  };
+  valorFrete: string = '0';
+
+  openAlertFinish: boolean = false;
+
+  quantidadeTotal: number = 0;
+  amount: number = 0;
+  newProduct: FormGroup;
+
+  cart: ICart[] = [];
 
   ngOnInit(): void {
     this.getCart();
@@ -47,6 +43,13 @@ export class CartComponent implements OnInit {
 
   returnToHome() {
     this.router.navigate(['/home']);
+  }
+
+  finalizarCompra() {
+    this.openAlertFinish = true;
+    setTimeout(() => {
+      this.openAlertFinish = false;
+    }, 5000);
   }
 
   getCart(): void {
@@ -58,10 +61,6 @@ export class CartComponent implements OnInit {
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
-  }
-
-  calculaQuantiadade(cart: ICart[]) {
-    this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }
 
   calculaValorTotal(cart: ICart[]) {
@@ -76,35 +75,15 @@ export class CartComponent implements OnInit {
       : { invalidPrice: { valid: false, value: control.value } };
   }
 
-  removeCart(cart: ICart) {
-    this.productService.removeItem(cart.id.toString()).subscribe(
-      (cart) => {
-        this.ngOnInit();
-      },
-      (error) => console.error('Erro ao carregar produtos', error)
-    );
+  calculaFrete(frete:string){
+
   }
 
-  updateQuantity(product: IProduct): void {
-    const cartItem = this.cart.find((item) => item.ProductId === product.id);
-    if (cartItem) {
-      cartItem.subtotal = product.price * cartItem.quantity;
-      this.calculaValorTotal(this.cart);
-      this.productService
-        .updateProductQuantity(cartItem.id, cartItem.quantity)
-        .subscribe(
-          (cart) => {
-            this.openAlert = true;
-            setTimeout(() => {
-              this.openAlert = false;
-            }, 5000);
-          },
-          (error) => console.error('Erro ao carregar produtos', error)
-        );
-    }
+  goToCart() {
+    this.router.navigate(['/cart']);
   }
 
-  goToFrete() {
-    this.router.navigate(['/freifht']);
+  calculaQuantiadade(cart: ICart[]) {
+    this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }
 }

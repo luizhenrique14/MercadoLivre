@@ -21,6 +21,8 @@ import { AuthService } from 'src/service/auth.service';
 import {  HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { RegisterComponent } from './component/login/register/register.component';
+import { FreightComponent } from './component/cart/freight/freight.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { RegisterComponent } from './component/login/register/register.component
     HomeComponent,
     CartComponent,
     RegisterComponent,
+    FreightComponent
   ],
   imports: [
     FormsModule,
@@ -43,7 +46,8 @@ import { RegisterComponent } from './component/login/register/register.component
     MatFormFieldModule,
     AppRoutingModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatRadioModule
   ],
   providers: [
     AuthService,

@@ -6,10 +6,7 @@
           <h1 class="center-align">Mercado Livre</h1>
         </div>
         <div *ngIf="openAlert" class="alert alert-success" role="alert">
-          Quantidade do Produto alterado com sucesso !!!
-        </div>
-        <div *ngIf="openAlertFinish" class="alert alert-success" role="alert">
-          Finalizado compra
+          Quantidade alterado com sucesso!
         </div>
         <div class="col-md-2">
           <button mat-fab extended (click)="returnToHome()">
@@ -18,9 +15,9 @@
           </button>
         </div>
         <div class="col-md-4">
-          <button mat-fab extended (click)="finalizarCompra()">
-            <mat-icon>done_all</mat-icon>
-            Finalizar Compra
+          <button mat-fab extended (click)="goToFrete()">            
+            Calcular Frete
+            <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
       </div>
@@ -34,7 +31,7 @@
                 <div class="card-body">
                   <h3 class="card-title">{{ item.Product.name }}</h3>
                   <p class="card-text">
-                    Valor do Produto: {{ item.Product.price }}
+                    Valor do Produto: R${{ item.Product.price }},00
                   </p>
                   <p class="card-text">
                     Quantidade:

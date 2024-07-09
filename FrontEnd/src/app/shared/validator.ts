@@ -24,7 +24,7 @@ export function passwordComplexityValidator(password: string): IValidPassword {
       return { valid: false, message: 'A senha deve ter entre 8 e 16 caracteres.' };
     }
   
-    return { valid: true, message: 'A senha atende aos critérios de complexidade.' };
+    return { valid: true, message: 'A senha deve atender aos seguintes critérios de complexidade: conter pelo menos uma letra maiúscula, um caractere especial, um número e ter entre 8 e 16 caracteres.' };
   }
   
 

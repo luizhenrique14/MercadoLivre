@@ -30,6 +30,7 @@ app.use(cors());
 // Rotas
 app.use('/api', cartRoutes);
 app.use('/api', productRoutes); 
+app.use('/api', productRoutes); 
 
 // Porta do servidor
 const PORT = process.env.PORT || 4000;
