@@ -31,7 +31,7 @@ Após o download, execute o instalador e siga as instruções na tela para compl
 git clone https://github.com/luizhenrique14/MercadoLivre-Case.git
 
 # Navegue até o diretório do backend
-cd seu-projeto/Backend
+cd MercadoLivre-Case/Backend
 
 # Instale as dependências
 npm install
@@ -54,7 +54,7 @@ node server.js
 
 ```bash
 # Navegue até o diretório do frontend
-cd seu-projeto/FrontEnd
+cd MercadoLivre-Case/FrontEnd
 
 # Instale as dependências
 npm install
@@ -68,7 +68,7 @@ npm start
 O projeto está estruturado da seguinte maneira:
 
 ```
-seu-projeto/
+MercadoLivre-Case/
 ├── Backend/
 │   ├── auth/
 │   │   ├── server.js
@@ -177,4 +177,4 @@ Depois de seguir os passos de instalação e configuração acima, você deve te
 Para mais informações, entre em contato com [luiz.henrique1494@gmail.com](mailto:luiz.henrique1494@gmail.com).
 ```
 
-Certifique-se de salvar este conteúdo em um arquivo chamado `README.md` na raiz do seu projeto. Substitua os placeholders como `https://github.com/seu-usuario/seu-projeto.git` e `luiz.henrique1494@gmail.com` pelas informações reais do seu projeto.
+Certifique-se de salvar este conteúdo em um arquivo chamado `README.md` na raiz do seu projeto. Substitua os placeholders como `https://github.com/luizhenrique14/MercadoLivre-Case.git` e `luiz.henrique1494@gmail.com` pelas informações reais do seu projeto.
