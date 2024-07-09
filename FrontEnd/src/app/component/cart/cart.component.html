@@ -31,7 +31,7 @@
                 <div class="card-body">
                   <h3 class="card-title">{{ item.Product.name }}</h3>
                   <p class="card-text">
-                    Valor do Produto: R${{ item.Product.price }},00
+                    Valor do Produto: {{ item.Product.price | currency:'BRL':'symbol':'1.2-2'}}
                   </p>
                   <p class="card-text">
                     Quantidade:
@@ -42,7 +42,7 @@
                       (change)="updateQuantity(item.Product)"
                     />
                   </p>
-                  <p class="card-text">SubTotal: R${{ item.subtotal }},00</p>
+                  <p class="card-text">SubTotal: {{ item.subtotal | currency:'BRL':'symbol':'1.2-2'}}</p>
                   <button mat-fab extended (click)="removeCart(item)">
                     <mat-icon>delete</mat-icon>
                     Remover Produto
@@ -61,7 +61,7 @@
       <div class="row">
         <div class="col-md-12">
           <h1 class="center-align">
-            Valor Total do Carrinho: R${{ amount }},00
+            Valor Total do Carrinho: {{ amount | currency:'BRL':'symbol':'1.2-2'}}
           </h1>
         </div>
       </div>

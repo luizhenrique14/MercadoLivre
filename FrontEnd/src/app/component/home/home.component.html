@@ -64,7 +64,7 @@
                 <div class="card-body">
                   <h3 class="card-title">{{ produto.name }}</h3>
                   <p class="card-text">
-                    Valor: R${{ produto.price.toFixed() }},00
+                    Valor: {{ produto.price| currency:'BRL':'symbol':'1.2-2'}}
                   </p>
                   <button mat-fab extended (click)="addCart(produto)">
                     <mat-icon>shopping_cart_checkout</mat-icon>
