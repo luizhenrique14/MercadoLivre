@@ -12,7 +12,7 @@ exports.getFreight = async (req, res) => {
 
     switch (option) {
       case 'sedex':
-        freightValue = totalValueNumber * 0.03;
+        freightValue = (totalValueNumber * 0.03) + 10;
         break;
       case 'correios':
         freightValue = 10;

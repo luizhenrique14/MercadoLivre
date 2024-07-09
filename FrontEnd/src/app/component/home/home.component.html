@@ -16,42 +16,43 @@
       </div>
       <mat-card>
         <div class="container custom-spacing">
-        <form [formGroup]="newProduct">
-          <div class="row container">
-            <h2>Adicionar Novo Produto</h2>
-          </div>
-          <div class="row container">
-            <div class="col-md-4">
-              <mat-form-field>
-                Nome:
-                <input matInput placeholder="name" formControlName="name" />
-              </mat-form-field>
+          <form [formGroup]="newProduct">
+            <div class="row container">
+              <h2>Adicionar Novo Produto</h2>
             </div>
-            <div class="col-md-4">
-              <mat-form-field>
-                Valor:<input
-                  matInput
-                  placeholder="Preço"
-                  formControlName="price"
-                />
-                <mat-error *ngIf="newProduct.get('price')?.hasError('required')"
-                  >Campo obrigatório</mat-error
-                >
-                <mat-error
-                  *ngIf="newProduct.get('price')?.hasError('invalidPrice')"
-                  >Digite um preço válido</mat-error
-                >
-              </mat-form-field>
+            <div class="row container">
+              <div class="col-md-4">
+                <mat-form-field>
+                  Nome:
+                  <input matInput placeholder="name" formControlName="name" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  Valor:<input
+                    matInput
+                    placeholder="Preço"
+                    formControlName="price"
+                  />
+                  <mat-error
+                    *ngIf="newProduct.get('price')?.hasError('required')"
+                    >Campo obrigatório</mat-error
+                  >
+                  <mat-error
+                    *ngIf="newProduct.get('price')?.hasError('invalidPrice')"
+                    >Digite um preço válido</mat-error
+                  >
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <button mat-fab extended (click)="addNewProduct()">
+                  <mat-icon>shopping_cart_checkout</mat-icon>
+                  Adicionar Novo Produto
+                </button>
+              </div>
             </div>
-            <div class="col-md-4">
-              <button mat-fab extended (click)="addNewProduct()">
-                <mat-icon>shopping_cart_checkout</mat-icon>
-                Adicionar Novo Produto
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
       </mat-card>
       <mat-card>
         <div class="container px-4 p-3 custom-spacing">
@@ -64,7 +65,8 @@
                 <div class="card-body">
                   <h3 class="card-title">{{ produto.name }}</h3>
                   <p class="card-text">
-                    Valor: {{ produto.price| currency:'BRL':'symbol':'1.2-2'}}
+                    Valor:
+                    {{ produto.price | currency : "BRL" : "symbol" : "1.2-2" }}
                   </p>
                   <button mat-fab extended (click)="addCart(produto)">
                     <mat-icon>shopping_cart_checkout</mat-icon>
@@ -76,12 +78,14 @@
           </div>
         </div>
       </mat-card>
-      
+
       <div class="row">
         <div class="col-md-12">
-          <h2 class="center-align">Quantidade total de Produtos: {{quantidadeTotal}}</h2>
+          <h2 class="center-align">
+            Quantidade total de Produtos: {{ quantidadeTotal }}
+          </h2>
         </div>
-      </div>      
+      </div>
     </div>
   </div>
 </div>

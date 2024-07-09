@@ -63,10 +63,10 @@ export class HomeComponent implements OnInit {
     this.calculaValorTotal();
   }
 
-  calculaValorTotal(){
+  calculaValorTotal() {
     this.productService.getCart().subscribe(
       (cart) => {
-        this.amount = cart.reduce((total, item) => total + item.subtotal, 0);        
+        this.amount = cart.reduce((total, item) => total + item.subtotal, 0);
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
@@ -100,28 +100,31 @@ export class HomeComponent implements OnInit {
 
   getCart(): void {
     this.productService.getCart().subscribe(
-      (cart) => { 
-        this.calculaQuantiadade(cart);        
+      (cart) => {
+        this.calculaQuantiadade(cart);
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
   }
 
-
   // Validador personalizado para aceitar apenas números separados por vírgula
   priceValidator(control: FormControl): { [key: string]: any } | null {
-    const valid = /^\d+(,\d+)?$/.test(control.value);
+    if (!control.value) {
+      return null;
+    }
+    const transformedValue = control.value.replace(',', '.');
+    const valid = /^\d+(\.\d+)?$/.test(transformedValue);
+
     return valid
       ? null
       : { invalidPrice: { valid: false, value: control.value } };
   }
 
   addCart(produto: IProduct) {
-
     const addCart: ICartRequest = {
       productId: produto.id.toString(),
-      quantity: 1
-    }
+      quantity: 1,
+    };
 
     if (addCart) {
       this.productService.addProductToCart(addCart).subscribe(
@@ -133,11 +136,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  goToCart(){    
+  goToCart() {
     this.router.navigate(['/cart']);
   }
 
-  calculaQuantiadade(cart:ICart[]){
+  calculaQuantiadade(cart: ICart[]) {
     this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
-  }
+  }  
 }

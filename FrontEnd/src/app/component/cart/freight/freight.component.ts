@@ -16,6 +16,7 @@ export class FreightComponent implements OnInit {
     private router: Router
   ) {}
 
+  showModal: boolean = false;
   valorFrete: string = '0';
 
   openAlertFinish: boolean = false;
@@ -30,6 +31,8 @@ export class FreightComponent implements OnInit {
     totalValue: '0',
   };
 
+  disabledButon: boolean = false;
+
   ngOnInit(): void {
     this.getCart();
   }
@@ -39,10 +42,7 @@ export class FreightComponent implements OnInit {
   }
 
   finalizarCompra() {
-    this.openAlertFinish = true;
-    setTimeout(() => {
-      this.openAlertFinish = false;
-    }, 5000);
+    this.showModal = true;  
   }
 
   getCart(): void {
@@ -57,9 +57,11 @@ export class FreightComponent implements OnInit {
   }
 
   calculaValorTotal(cart: ICart[]) {
-    return this.amount = cart.reduce((total, item) => total + item.subtotal, 0).toFixed(2).toString();
+    return (this.amount = cart
+      .reduce((total, item) => total + item.subtotal, 0)
+      .toFixed(2)
+      .toString());
   }
-  
 
   priceValidator(control: FormControl): { [key: string]: any } | null {
     const valid = /^\d+(,\d+)?$/.test(control.value);
@@ -73,13 +75,28 @@ export class FreightComponent implements OnInit {
   }
 
   calculaFrete(frete: string) {
-    this.productService.getFreigth(frete, this.calculaValorTotal(this.cart)).subscribe(
-      (freight: IFreight) => {
-        this.freight = freight;
-        this.amount = this.freight.endValue
-      },
-      (error) => console.error('Erro ao carregar produtos', error)
-    );
+    this.productService
+      .getFreigth(frete, this.calculaValorTotal(this.cart))
+      .subscribe(
+        (freight: IFreight) => {
+          this.freight = freight;
+          this.amount = this.freight.endValue;
+          this.disabledButon = true;
+        },
+        (error) => console.error('Erro ao carregar produtos', error)
+      );
   }
 
+  confirmarCompra(): void {
+    this.closeModal(); 
+    this.openAlertFinish = true;
+    setTimeout(() => {
+      this.openAlertFinish = false;
+      this.router.navigate(['/home']);
+    }, 5000);
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
 }

@@ -13,16 +13,17 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './component/home/home.component';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './component/cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/service/auth.service';
-import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { RegisterComponent } from './component/login/register/register.component';
 import { FreightComponent } from './component/cart/freight/freight.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
     HomeComponent,
     CartComponent,
     RegisterComponent,
-    FreightComponent
+    FreightComponent,
   ],
   imports: [
     FormsModule,
@@ -47,11 +48,12 @@ import { MatRadioModule } from '@angular/material/radio';
     AppRoutingModule,
     MatInputModule,
     HttpClientModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

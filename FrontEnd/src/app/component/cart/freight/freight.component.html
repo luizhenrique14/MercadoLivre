@@ -1,6 +1,9 @@
 <div class="container mt-10">
   <div class="row justify-content-center">
     <div class="col-md-12 p-5">
+      <div *ngIf="openAlertFinish" class="alert alert-success" role="alert">
+        Compra Finalizada com sucesso !
+      </div>
       <div class="row">
         <div class="col-md-6">
           <h1 class="center-align">Mercado Livre</h1>
@@ -12,7 +15,7 @@
           </button>
         </div>
         <div class="col-md-4">
-          <button mat-fab extended (click)="finalizarCompra()">
+          <button mat-fab extended (click)="finalizarCompra()" [disabled]="!disabledButon">
             <mat-icon>done_all</mat-icon>
             Finalizar Compra
           </button>
@@ -32,10 +35,15 @@
                 <div class="card-body">
                   <h3 class="card-title">{{ item.Product.name }}</h3>
                   <p class="card-text">
-                    Valor do Produto: R${{ item.Product.price }},00
+                    Valor do Produto: R${{
+                      item.Product.price | currency : "BRL" : "symbol" : "1.2-2"
+                    }}
                   </p>
                   <p class="card-text">Quantidade: {{ item.quantity }}</p>
-                  <p class="card-text">SubTotal: {{ item.subtotal }},00</p>
+                  <p class="card-text">
+                    SubTotal:
+                    {{ item.subtotal | currency : "BRL" : "symbol" : "1.2-2" }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -63,21 +71,45 @@
         <div class="col-md-4">
           <mat-radio-group aria-label="Selecione uma opção de envio">
             <div class="row">
-              <mat-radio-button value="correios" (change)="calculaFrete('correios')">Correios</mat-radio-button>
+              <mat-radio-button
+                value="correios"
+                (change)="calculaFrete('correios')"
+                >Correios</mat-radio-button
+              >
             </div>
             <div class="row">
-              <mat-radio-button value="sedex" (change)="calculaFrete('sedex')">Sedex</mat-radio-button>
+              <mat-radio-button value="sedex" (change)="calculaFrete('sedex')"
+                >Sedex</mat-radio-button
+              >
             </div>
             <div class="row">
-              <mat-radio-button value="retireNaLoja" (change)="calculaFrete('retireNaLoja')">Retire na Loja</mat-radio-button
+              <mat-radio-button
+                value="retireNaLoja"
+                (change)="calculaFrete('retireNaLoja')"
+                >Retire na Loja</mat-radio-button
               >
             </div>
             <div class="row mt-3">
-              <div class="col">Valor do Frete: {{freight.freightValue}}</div>
+              <div class="col">Valor do Frete: {{ freight.freightValue }}</div>
             </div>
           </mat-radio-group>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmação -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <h1>Confirmação de Compra</h1>
+    <p>Deseja realmente finalizar a compra?</p>
+    <div class="modal-actions">
+      <button mat-flat-button (click)="closeModal()">Cancelar</button>
+      <button mat-stroked-button (click)="confirmarCompra()">
+        Confirmar Compra
+      </button>
+      <!-- <button mat-button color="primary" (click)="confirmarCompra()">Confirmar Compra</button> -->
     </div>
   </div>
 </div>
