@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ICart, ICartRequest } from 'src/model/cart';
-import { IProduct } from 'src/model/product';
+import { ICart } from 'src/model/cart';
+import { IFreight } from 'src/model/freight';
 import { CartProductServie } from 'src/service/cart-products.service';
 
 @Component({
@@ -18,24 +13,22 @@ import { CartProductServie } from 'src/service/cart-products.service';
 export class FreightComponent implements OnInit {
   constructor(
     private productService: CartProductServie,
-    private fb: FormBuilder,
     private router: Router
-  ) {
-    this.newProduct = this.fb.group({
-      name: ['', [Validators.required]],
-      price: ['', [Validators.required, this.priceValidator]],
-    });
-  }
+  ) {}
 
   valorFrete: string = '0';
 
   openAlertFinish: boolean = false;
 
   quantidadeTotal: number = 0;
-  amount: number = 0;
-  newProduct: FormGroup;
+  amount: string = '0.00';
 
   cart: ICart[] = [];
+  freight: IFreight = {
+    endValue: '0',
+    freightValue: '0',
+    totalValue: '0',
+  };
 
   ngOnInit(): void {
     this.getCart();
@@ -64,10 +57,10 @@ export class FreightComponent implements OnInit {
   }
 
   calculaValorTotal(cart: ICart[]) {
-    this.amount = cart.reduce((total, item) => total + item.subtotal, 0);
+    return this.amount = cart.reduce((total, item) => total + item.subtotal, 0).toFixed(2).toString();
   }
+  
 
-  // Validador personalizado para aceitar apenas números separados por vírgula
   priceValidator(control: FormControl): { [key: string]: any } | null {
     const valid = /^\d+(,\d+)?$/.test(control.value);
     return valid
@@ -75,15 +68,18 @@ export class FreightComponent implements OnInit {
       : { invalidPrice: { valid: false, value: control.value } };
   }
 
-  calculaFrete(frete:string){
-
-  }
-
-  goToCart() {
-    this.router.navigate(['/cart']);
-  }
-
   calculaQuantiadade(cart: ICart[]) {
     this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }
+
+  calculaFrete(frete: string) {
+    this.productService.getFreigth(frete, this.calculaValorTotal(this.cart)).subscribe(
+      (freight: IFreight) => {
+        this.freight = freight;
+        this.amount = this.freight.endValue
+      },
+      (error) => console.error('Erro ao carregar produtos', error)
+    );
+  }
+
 }

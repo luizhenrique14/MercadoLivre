@@ -42,7 +42,7 @@
                       (change)="updateQuantity(item.Product)"
                     />
                   </p>
-                  <p class="card-text">SubTotal: {{ item.subtotal }}</p>
+                  <p class="card-text">SubTotal: R${{ item.subtotal }},00</p>
                   <button mat-fab extended (click)="removeCart(item)">
                     <mat-icon>delete</mat-icon>
                     Remover Produto
@@ -55,7 +55,7 @@
         </div>
       <div class="row">
         <div class="col-md-12">
-          <h2 class="center-align">Quantidade total: {{ quantidadeTotal }}</h2>
+          <h2 class="center-align">Quantidade total de produtos: {{ quantidadeTotal }}</h2>
         </div>
       </div>
       <div class="row">

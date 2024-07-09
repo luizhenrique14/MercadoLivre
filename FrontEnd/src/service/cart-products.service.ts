@@ -4,6 +4,7 @@ import { IProduct } from 'src/model/product';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { ICart, ICartRequest } from 'src/model/cart';
+import { IFreight } from 'src/model/freight';
 
 @Injectable({
   providedIn: 'root',
@@ -63,6 +64,23 @@ export class CartProductServie {
         { quantity: quantity },
         { headers: this.headers }
       )
+      .pipe(
+        catchError(
+          this.handleError(
+            'Erro ao atualizar quantidade do produto no carrinho'
+          )
+        )
+      );
+  }
+
+  getFreigth(typeFreigth: string, totalValue: string): Observable<IFreight> {
+    return this.http
+      .post<IFreight>(`${this.apiUrl}/freight`, 
+      {
+        option: typeFreigth,
+        totalValue: totalValue,
+      },
+      { headers: this.headers })
       .pipe(
         catchError(
           this.handleError(

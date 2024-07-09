@@ -2,6 +2,7 @@ const express = require('express');
 const sequelize = require('./config/db');
 const cartRoutes = require('./routes/cartRoutes');
 const productRoutes = require('./routes/productRoutes');
+const freight = require('./routes/freight');
 const cors = require('cors');
 
 
@@ -30,7 +31,7 @@ app.use(cors());
 // Rotas
 app.use('/api', cartRoutes);
 app.use('/api', productRoutes); 
-app.use('/api', productRoutes); 
+app.use('/api', freight); 
 
 // Porta do servidor
 const PORT = process.env.PORT || 4000;

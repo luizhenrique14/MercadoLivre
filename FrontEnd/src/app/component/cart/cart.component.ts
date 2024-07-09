@@ -90,8 +90,7 @@ export class CartComponent implements OnInit {
     if (cartItem) {
       cartItem.subtotal = product.price * cartItem.quantity;
       this.calculaValorTotal(this.cart);
-      this.productService
-        .updateProductQuantity(cartItem.id, cartItem.quantity)
+      this.productService.updateProductQuantity(cartItem.id, cartItem.quantity)
         .subscribe(
           (cart) => {
             this.openAlert = true;
@@ -101,6 +100,7 @@ export class CartComponent implements OnInit {
           },
           (error) => console.error('Erro ao carregar produtos', error)
         );
+      this.calculaQuantiadade(this.cart);
     }
   }
 
