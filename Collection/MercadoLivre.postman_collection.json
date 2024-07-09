@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "216d6d0d-379e-401f-b805-2c66d5e2d4d2",
 		"name": "MercadoLivre",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "5779151"
 	},
 	"item": [
@@ -20,19 +20,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:4000/api/cart/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"cart",
-						"1"
-					]
-				}
+				"url": "http://localhost:4000/api/cart/2"
 			},
 			"response": []
 		},
@@ -41,18 +29,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:4000/api/cart",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"cart"
-					]
-				}
+				"url": "http://localhost:4000/api/cart"
 			},
 			"response": []
 		},
@@ -70,19 +47,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:4000/api/cart/add",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"cart",
-						"add"
-					]
-				}
+				"url": "http://localhost:4000/api/cart/add"
 			},
 			"response": []
 		},
@@ -100,19 +65,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:4000/api/products/add",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"products",
-						"add"
-					]
-				}
+				"url": "http://localhost:4000/api/products/add"
 			},
 			"response": []
 		},
@@ -121,18 +74,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:4000/api/products",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"products"
-					]
-				}
+				"url": "http://localhost:4000/api/products"
 			},
 			"response": []
 		},
@@ -141,19 +83,7 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/api/cart/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"cart",
-						"1"
-					]
-				}
+				"url": "http://localhost:4000/api/cart/1"
 			},
 			"response": []
 		},
@@ -164,25 +94,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"example_user\",\r\n    \"password\": \"secretpassword\"\r\n}\r\n",
+					"raw": "     {\r\n       \"username\": \"luizhenrique1994\",\r\n       \"password\": \"Luiz1994@1994@\"\r\n     }",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:5000/api/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"register"
-					]
-				}
+				"url": "http://localhost:5000/api/register"
 			},
 			"response": []
 		},
@@ -200,18 +119,25 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:5000/api/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"login"
-					]
-				}
+				"url": "http://localhost:5000/api/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Calcula Frete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"opcao\": \"sedex\",\r\n  \"valorTotal\": \"42\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/freight"
 			},
 			"response": []
 		}
