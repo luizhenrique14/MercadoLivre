@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  formResetSenha: FormGroup;
-  senhasIguais: boolean = true;
+  formResetPassword: FormGroup;
+  passwordsIguals: boolean = true;
   validPassword: IValidPassword = {
     message: '',
     valid: true,
@@ -24,38 +24,37 @@ export class RegisterComponent implements OnInit {
   openAlert = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    this.formResetSenha = this.fb.group({
+    this.formResetPassword = this.fb.group({
       login: ['', [Validators.required]],
-      senha: ['', [Validators.required, Validators.minLength(8)]],
-      confirmarSenha: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
   ngOnInit(): void {}
 
   register() {
-    let login = this.formResetSenha.get('login')?.value
-    let senha = this.formResetSenha.get('senha')?.value;
-    let confirmarSenha =
-      this.formResetSenha.get('confirmarSenha')?.value;
+    let login = this.formResetPassword.get('login')?.value
+    let password = this.formResetPassword.get('password')?.value;
+    let confirmPassword =
+      this.formResetPassword.get('confirmPassword')?.value;
 
-    this.senhasIguais = matchingPasswordsValidator(
-      senha,
-      confirmarSenha
+    this.passwordsIguals = matchingPasswordsValidator(
+      password,
+      confirmPassword
     );
-    this.validPassword = passwordComplexityValidator(senha);
+    this.validPassword = passwordComplexityValidator(password);
     if (
-      this.formResetSenha.valid &&
-      this.senhasIguais &&
+      this.formResetPassword.valid &&
+      this.passwordsIguals &&
       this.validPassword.valid
     ) {
-      this.authService.register(login,senha).subscribe(
+      this.authService.register(login,password).subscribe(
         (ret) => {
           console.log('ret', ret);
-
         },
         (error) => {      
-          console.error('Erro ao registrar')  
+          console.error('Erro ao registrar', error)  
         }
       );
       this.openAlert = true;

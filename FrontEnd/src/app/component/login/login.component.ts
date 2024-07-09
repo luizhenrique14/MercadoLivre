@@ -16,14 +16,14 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       login: ['', [Validators.required]],
-      senha: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   onSubmit(): void {
     const login = this.loginForm.get('login')?.value;
-    const senha = this.loginForm.get('senha')?.value;
-    this.authService.login(login, senha).subscribe(
+    const password = this.loginForm.get('password')?.value;
+    this.authService.login(login, password).subscribe(
       () => {
         this.router.navigate(['/home']);
       },

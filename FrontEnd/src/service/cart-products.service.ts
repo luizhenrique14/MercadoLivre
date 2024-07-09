@@ -19,7 +19,7 @@ export class CartProductServie {
 
   constructor(private http: HttpClient) {}
 
-  getProdutos(): Observable<IProduct[]> {
+  getProducts(): Observable<IProduct[]> {
     return this.http
       .get<IProduct[]>(`${this.apiUrl}/products`, { headers: this.headers })
       .pipe(catchError(this.handleError('Erro ao obter produtos')));

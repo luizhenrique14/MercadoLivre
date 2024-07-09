@@ -13,7 +13,7 @@
               </mat-card-header>
             </div>
 
-            <form [formGroup]="formResetSenha" (ngSubmit)="register()">
+            <form [formGroup]="formResetPassword" (ngSubmit)="register()">
               <div class="row">
                 <div class="col-md-3 offset-md-3">
                   <mat-form-field>
@@ -32,8 +32,8 @@
                     <input
                       matInput
                       type="password"
-                      placeholder="senha"
-                      formControlName="senha"
+                      placeholder="password"
+                      formControlName="password"
                     />
                   </mat-form-field>
                 </div>
@@ -45,7 +45,7 @@
                       matInput
                       type="password"
                       placeholder="confirmar senha"
-                      formControlName="confirmarSenha"
+                      formControlName="confirmPassword"
                     />
                   </mat-form-field>
                 </div>
@@ -57,7 +57,7 @@
                   Conter pelo menos uma letra maiúscula, um caractere especial,
                   um número e ter entre 8 e 16 caracteres.
                 </p>
-                <mat-error *ngIf="!senhasIguais">
+                <mat-error *ngIf="!passwordsIguals">
                   As senhas não coincidem.
                 </mat-error>
 

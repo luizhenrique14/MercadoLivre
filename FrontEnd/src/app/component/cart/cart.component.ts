@@ -53,18 +53,18 @@ export class CartComponent implements OnInit {
     this.productService.getCart().subscribe(
       (cart) => {
         this.cart = cart;
-        this.calculaValorTotal(this.cart);
-        this.calculaQuantiadade(this.cart);
+        this.calculateTotalValue(this.cart);
+        this.calculateQuantity(this.cart);
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
   }
 
-  calculaQuantiadade(cart: ICart[]) {
+  calculateQuantity(cart: ICart[]) {
     this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }
 
-  calculaValorTotal(cart: ICart[]) {
+  calculateTotalValue(cart: ICart[]) {
     this.amount = cart.reduce((total, item) => total + item.subtotal, 0);
   }
 
@@ -89,7 +89,7 @@ export class CartComponent implements OnInit {
     const cartItem = this.cart.find((item) => item.ProductId === product.id);
     if (cartItem) {
       cartItem.subtotal = product.price * cartItem.quantity;
-      this.calculaValorTotal(this.cart);
+      this.calculateTotalValue(this.cart);
       this.productService.updateProductQuantity(cartItem.id, cartItem.quantity)
         .subscribe(
           (cart) => {
@@ -100,7 +100,7 @@ export class CartComponent implements OnInit {
           },
           (error) => console.error('Erro ao carregar produtos', error)
         );
-      this.calculaQuantiadade(this.cart);
+      this.calculateQuantity(this.cart);
     }
   }
 

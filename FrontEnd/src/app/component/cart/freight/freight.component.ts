@@ -41,7 +41,7 @@ export class FreightComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  finalizarCompra() {
+  finishPurchase() {
     this.showModal = true;  
   }
 
@@ -49,14 +49,14 @@ export class FreightComponent implements OnInit {
     this.productService.getCart().subscribe(
       (cart) => {
         this.cart = cart;
-        this.calculaValorTotal(this.cart);
-        this.calculaQuantiadade(this.cart);
+        this.calculateTotalValue(this.cart);
+        this.calculateQuantity(this.cart);
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
   }
 
-  calculaValorTotal(cart: ICart[]) {
+  calculateTotalValue(cart: ICart[]) {
     return (this.amount = cart
       .reduce((total, item) => total + item.subtotal, 0)
       .toFixed(2)
@@ -70,13 +70,13 @@ export class FreightComponent implements OnInit {
       : { invalidPrice: { valid: false, value: control.value } };
   }
 
-  calculaQuantiadade(cart: ICart[]) {
+  calculateQuantity(cart: ICart[]) {
     this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }
 
-  calculaFrete(frete: string) {
+  calculateFreight(frete: string) {
     this.productService
-      .getFreigth(frete, this.calculaValorTotal(this.cart))
+      .getFreigth(frete, this.calculateTotalValue(this.cart))
       .subscribe(
         (freight: IFreight) => {
           this.freight = freight;
@@ -87,7 +87,7 @@ export class FreightComponent implements OnInit {
       );
   }
 
-  confirmarCompra(): void {
+  confirmPurchase(): void {
     this.closeModal(); 
     this.openAlertFinish = true;
     setTimeout(() => {

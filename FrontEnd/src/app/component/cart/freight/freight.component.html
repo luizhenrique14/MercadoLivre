@@ -6,7 +6,10 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <h1 class="center-align">Mercado Livre</h1>
+          <h1 class="center-align">
+            <img src="assets/img/icon.png" alt="Ícone Mercado Livre" style="width: 64px; height: 64px; margin-right: 10px;">
+            Mercado Livre
+          </h1>
         </div>
         <div class="col-md-2">
           <button mat-fab extended (click)="returnToHome()">
@@ -15,7 +18,7 @@
           </button>
         </div>
         <div class="col-md-4">
-          <button mat-fab extended (click)="finalizarCompra()" [disabled]="!disabledButon">
+          <button mat-fab extended (click)="finishPurchase()" [disabled]="!disabledButon">
             <mat-icon>done_all</mat-icon>
             Finalizar Compra
           </button>
@@ -73,19 +76,19 @@
             <div class="row">
               <mat-radio-button
                 value="correios"
-                (change)="calculaFrete('correios')"
+                (change)="calculateFreight('correios')"
                 >Correios</mat-radio-button
               >
             </div>
             <div class="row">
-              <mat-radio-button value="sedex" (change)="calculaFrete('sedex')"
+              <mat-radio-button value="sedex" (change)="calculateFreight('sedex')"
                 >Sedex</mat-radio-button
               >
             </div>
             <div class="row">
               <mat-radio-button
                 value="retireNaLoja"
-                (change)="calculaFrete('retireNaLoja')"
+                (change)="calculateFreight('retireNaLoja')"
                 >Retire na Loja</mat-radio-button
               >
             </div>
@@ -106,10 +109,10 @@
     <p>Deseja realmente finalizar a compra?</p>
     <div class="modal-actions">
       <button mat-flat-button (click)="closeModal()">Cancelar</button>
-      <button mat-stroked-button (click)="confirmarCompra()">
+      <button mat-stroked-button (click)="confirmPurchase()">
         Confirmar Compra
       </button>
-      <!-- <button mat-button color="primary" (click)="confirmarCompra()">Confirmar Compra</button> -->
+      <!-- <button mat-button color="primary" (click)="confirmPurchase()">Confirmar Compra</button> -->
     </div>
   </div>
 </div>

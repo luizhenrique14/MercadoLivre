@@ -58,12 +58,12 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.getProdutos();
+    this.getProducts();
     this.getCart();
-    this.calculaValorTotal();
+    this.calculateTotalValue();
   }
 
-  calculaValorTotal() {
+  calculateTotalValue() {
     this.productService.getCart().subscribe(
       (cart) => {
         this.amount = cart.reduce((total, item) => total + item.subtotal, 0);
@@ -89,8 +89,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getProdutos(): void {
-    this.productService.getProdutos().subscribe(
+  getProducts(): void {
+    this.productService.getProducts().subscribe(
       (produtos) => {
         this.produtos = produtos;
       },
@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
   getCart(): void {
     this.productService.getCart().subscribe(
       (cart) => {
-        this.calculaQuantiadade(cart);
+        this.calculateQuantity(cart);
       },
       (error) => console.error('Erro ao carregar produtos', error)
     );
@@ -140,7 +140,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/cart']);
   }
 
-  calculaQuantiadade(cart: ICart[]) {
+  calculateQuantity(cart: ICart[]) {
     this.quantidadeTotal = cart.reduce((sum, item) => sum + item.quantity, 0);
   }  
 }
