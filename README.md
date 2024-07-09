@@ -144,7 +144,7 @@ A coleção contém as seguintes requisições:
 
 6. **Deletar Produto do Carrinho**
    - Método: DELETE
-   - URL: `http://localhost:5000/api/cart/1`
+   - URL: `http://localhost:4000/api/cart/1`
 
 7. **Registrar Usuário**
    - Método: POST
